@@ -23,7 +23,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author tAnniiz-PC
+ * @author anfeww
  */
 public class Main {
 

@@ -216,11 +216,11 @@ public class Forest extends JPanel {
             this.state = state;
             switch(this.state){
                 case 0:
-                    this.setBackground(Color.YELLOW); this.setText("" + this.state); break;
+                    this.setBackground(Color.YELLOW); this.setText(""  ); break;
                 case 1:
-                    this.setBackground(Color.GREEN); this.setText("" + this.state); break;
+                    this.setBackground(Color.GREEN); this.setText("" ); break;
                 case 2:
-                    this.setBackground(Color.RED); this.setText("" + this.state); break;
+                    this.setBackground(Color.RED); this.setText(""); break;
             }
             Forest.this.update();
         }

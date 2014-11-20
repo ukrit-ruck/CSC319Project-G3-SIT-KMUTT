@@ -72,7 +72,7 @@ public class Main {
         
         frame.add(forest, BorderLayout.CENTER);
         frame.add(sideMenu, BorderLayout.EAST);
-        frame.add(panel2, BorderLayout.NORTH);
+        frame.add(panel2, BorderLayout.SOUTH);
         
         frame.setVisible(true);
 

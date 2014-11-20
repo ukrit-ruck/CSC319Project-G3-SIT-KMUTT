@@ -8,6 +8,7 @@ package spread;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
@@ -23,7 +24,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author anfeww
+ * @author tAnniiz-PC
  */
 public class Main {
 
@@ -32,7 +33,7 @@ public class Main {
      */
     static Thread auto;
     static Forest forest;
-    static int counter = 0, width = 10, height = 10, probB = 0, probC = 100, probT = 100;
+    static int counter = 0, width = 50, height = 50, probB = 0, probC = 50, probT = 100;
     public static void main(String[] args) {
         
 
@@ -44,27 +45,33 @@ public class Main {
         JPanel panel2 = new JPanel();
         panel2.setLayout(new FlowLayout());
         panel2.setBorder(BorderFactory.createLineBorder(Color.black));
+        JLabel step = new JLabel("Step: " + counter);
+        panel2.add(step);
         JButton man = new JButton("Manual");
         panel2.add(man);
-        JButton pause = new JButton("Pause");
-        panel2.add(pause);
         JButton autospread = new JButton("Auto spraed");
         panel2.add(autospread);
+        JButton pause = new JButton("Pause");
+        panel2.add(pause);
         JButton size = new JButton("Set Size");
         panel2.add(size);
         JButton reset = new JButton("Reset");
         panel2.add(reset);
+        
         JButton probt = new JButton("Probtree");
-        panel2.add(probt);
         JButton probb = new JButton("Probburn");
-        panel2.add(probb);
         JButton probc = new JButton("Probcacth");
-        panel2.add(probc);
+        
         panel2.setBackground(Color.green);
-        frame.add(panel2);
         frame.add(panel2, BorderLayout.NORTH);
         
+        JPanel sideMenu = new JPanel(new GridLayout(3, 1));
+        sideMenu.add(probb);
+        sideMenu.add(probc);
+        sideMenu.add(probt);
+        
         frame.add(forest, BorderLayout.CENTER);
+        frame.add(sideMenu, BorderLayout.EAST);
         frame.add(panel2, BorderLayout.NORTH);
         
         frame.setVisible(true);
@@ -77,7 +84,9 @@ public class Main {
                         while(!forest.isEnd()){
                             forest.spread();
                             counter++;
-                            System.out.println(counter);
+                            step.setText("Step: " + counter);
+                            frame.validate();
+                            frame.repaint();
                         }
                     }
                 };
@@ -89,6 +98,10 @@ public class Main {
             public void actionPerformed(ActionEvent e)
             {
                 forest.reset();
+                counter = 0;
+                step.setText("Step: " + counter);
+                frame.validate();
+                frame.repaint();
             }
         }); 
         
@@ -123,7 +136,7 @@ public class Main {
             public void actionPerformed(ActionEvent e)
             {
                 probC = Integer.parseInt(JOptionPane.showInputDialog("Input Probcatch: "));
-                forest.setProbB(probC);
+                forest.setProbC(probC);
             }
         }); 
         
@@ -131,7 +144,7 @@ public class Main {
             public void actionPerformed(ActionEvent e)
             {
                 probT = Integer.parseInt(JOptionPane.showInputDialog("Input Probtree: "));
-                forest.setProbB(probT);
+                forest.setProbT(probT);
             }
         }); 
         
@@ -147,7 +160,11 @@ public class Main {
             {
                 if(!forest.isEnd()){
                     forest.spread();
+                    counter++;
                 }
+                step.setText("Step: " + counter);
+                frame.validate();
+                frame.repaint();
             }
         }); 
     }  

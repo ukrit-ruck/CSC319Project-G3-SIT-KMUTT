@@ -7,26 +7,30 @@ package spread;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 /**
  *
- * @author tAnniiz-PC
+ * @author anfeww
  */
 public class Forest extends JPanel {
     private int width, height, probC, probT, probB;
     private Tree[][] tree;
+    private GridLayout gl;
     
     public Forest(){
         this.width = 50;
         this.height = 50;
-        this.probC = 0;
+        this.probC = 100;
         this.probT = 100;
         this.probB = 0;
-        this.tree = new Tree[this.width][this.width];
-
-        this.setLayout(new GridLayout(this.width, this.height));
+        this.tree = new Tree[this.height][this.width];
+        this.gl = new GridLayout(this.height, this.width);
+        this.gl.setVgap(5);
+        this.gl.setHgap(5);
         
         for(int i = 0 ; i < this.height ; i++){
             for(int j = 0 ; j < this.width ; j++){
@@ -50,8 +54,8 @@ public class Forest extends JPanel {
             }
         }
         
-        tree[this.width / 2][this.height / 2].setState(2);
-        update();
+        tree[this.height / 2][this.width / 2].setState(2);
+        this.update();
     }
     
     public Forest(int width, int height, int probB, int probC, int probT){
@@ -60,13 +64,17 @@ public class Forest extends JPanel {
         this.probC = probC;
         this.probT = probT;
         this.probB = probB;
-        this.setLayout(new GridLayout(this.width, this.height));
+        this.gl = new GridLayout(this.height, this.width);
+        this.gl.setVgap(5);
+        this.gl.setHgap(5);
         
-        this.tree = new Tree[this.width][this.height];
+        this.tree = new Tree[this.height][this.width];
+        this.reset();
         
+        /*
         for(int i = 0 ; i < this.height ; i++){
             for(int j = 0 ; j < this.width ; j++){
-                if(i == 0 || i == this.width - 1 || j == 0 || j == this.height - 1){
+                if(i == 0 || i == this.height - 1 || j == 0 || j == this.weight - 1){
                     tree[i][j] = new Tree(0);
                     this.add(tree[i][j]);
                 } else {
@@ -76,8 +84,8 @@ public class Forest extends JPanel {
             }
         }
         
-        tree[this.width / 2][this.height / 2].setState(2);
-        update();
+        tree[this.height / 2][this.width / 2].setState(2);
+        this.update();*/
     }
     
     public boolean random(int prob){
@@ -114,11 +122,13 @@ public class Forest extends JPanel {
     }
     
     public void burn(char dir, int posX, int posY) {
-        switch(dir){
+        if(this.random(probC)){
+            switch(dir){
             case 'N': if(tree[posX][posY - 1].getState() == 1) tree[posX][posY - 1].setState(2); tree[posX][posY - 1].setFire(false); break;
             case 'E': if(tree[posX + 1][posY].getState() == 1) tree[posX + 1][posY].setState(2); tree[posX + 1][posY].setFire(false); break;
             case 'W': if(tree[posX - 1][posY].getState() == 1) tree[posX - 1][posY].setState(2); tree[posX - 1][posY].setFire(false); break;
             case 'S': if(tree[posX][posY + 1].getState() == 1) tree[posX][posY + 1].setState(2); tree[posX][posY + 1].setFire(false); break;
+            }
         }
     }
     
@@ -137,16 +147,19 @@ public class Forest extends JPanel {
     public void setSize(int width, int height){
         this.width = width;
         this.height = height;
-        this.setLayout(new GridLayout(this.width, this.height));
-        this.tree = new Tree[this.width][this.height];
+        this.tree = new Tree[this.height][this.width];
         this.reset();
     }
     
     public void reset(){
+        this.gl = new GridLayout(this.height, this.width);
+        this.gl.setVgap(1);
+        this.gl.setHgap(1);
+        this.setLayout(this.gl);
         this.removeAll();
         for(int i = 0 ; i < this.height ; i++){
             for(int j = 0 ; j < this.width ; j++){
-                if(i == 0 || i == this.width - 1 || j == 0 || j == this.height - 1){
+                if(i == 0 || i == this.height - 1 || j == 0 || j == this.width - 1){
                     tree[i][j] = new Tree(0);
                     this.add(tree[i][j]);
                 } else {
@@ -166,8 +179,8 @@ public class Forest extends JPanel {
             }
         }
         
-        tree[this.width / 2][this.height / 2].setState(2);
-        update();
+        tree[this.height / 2][this.width / 2].setState(2);
+        this.update();
     }
 
     public void setProbC(int probC) {
@@ -190,12 +203,17 @@ public class Forest extends JPanel {
 
     private class Tree extends JLabel {
         private final static int YELLOW = 0, GREED = 1, RED = 2;
+        private Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
         private int state;
         private boolean fire;
+        private boolean isShow;
         
         public Tree(int state){
             this.state = state;
             this.fire = true;
+            this.isShow = false;
+            
+            //this.setBorder(this.border);
             this.setState(this.state);
             this.setOpaque(true);
         }
@@ -216,15 +234,31 @@ public class Forest extends JPanel {
             this.state = state;
             switch(this.state){
                 case 0:
-                    this.setBackground(Color.YELLOW); this.setText(""  ); break;
+                    this.setBackground(Color.decode("#FFCC00")); break;
                 case 1:
-                    this.setBackground(Color.GREEN); this.setText("" ); break;
+                    this.setBackground(Color.decode("#66CC00")); break;
                 case 2:
-                    this.setBackground(Color.RED); this.setText(""); break;
+                    this.setBackground(Color.decode("#FF3300")); break;
             }
+            
+            if(this.isShow){
+                this.showNum();
+            }
+            
             Forest.this.update();
         }
         
+        public void hideNum(){
+            this.isShow = false;
+            this.setText("" + this.state);
+            Forest.this.update();
+        }
+        
+        public void showNum(){
+            this.isShow = true;
+            this.setText("" + this.state);
+            Forest.this.update();
+        }
         
     }
 }

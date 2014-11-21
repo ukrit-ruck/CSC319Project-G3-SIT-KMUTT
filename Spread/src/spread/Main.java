@@ -24,7 +24,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author tAnniiz-PC
+ * @author anfeww
  */
 public class Main {
 
@@ -36,12 +36,12 @@ public class Main {
     static int counter = 0, width = 50, height = 50, probB = 0, probC = 50, probT = 100;
     public static void main(String[] args) {
         
-
+        //create frame to input forest into frame.
         forest = new Forest(width, height, probB, probC, probT);
         JFrame frame = new JFrame("SpreadFire");
         frame.setSize(800,600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+        //create panel into the frame
         JPanel panel2 = new JPanel();
         panel2.setLayout(new FlowLayout());
         panel2.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -57,7 +57,7 @@ public class Main {
         panel2.add(size);
         JButton reset = new JButton("Reset");
         panel2.add(reset);
-        
+        //create button of Probtree , probburn ,and probcacth
         JButton probt = new JButton("Probtree");
         JButton probb = new JButton("Probburn");
         JButton probc = new JButton("Probcacth");
@@ -75,7 +75,7 @@ public class Main {
         frame.add(panel2, BorderLayout.SOUTH);
         
         frame.setVisible(true);
-
+        //create autospread action
         autospread.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
@@ -93,7 +93,7 @@ public class Main {
                 auto.start();
             }
         }); 
-        
+        //create reset action
         reset.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
@@ -104,7 +104,7 @@ public class Main {
                 frame.repaint();
             }
         }); 
-        
+        // create set size action
         size.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
@@ -123,7 +123,7 @@ public class Main {
                 forest.setSize(width, height);
             }
         }); 
-        
+        //create prob burn action
         probb.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
@@ -131,7 +131,7 @@ public class Main {
                 forest.setProbB(probB);
             }
         }); 
-        
+        //create prob catch action
         probc.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
@@ -139,7 +139,7 @@ public class Main {
                 forest.setProbC(probC);
             }
         }); 
-        
+        //create prob tree action
         probt.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
@@ -147,14 +147,14 @@ public class Main {
                 forest.setProbT(probT);
             }
         }); 
-        
+        //create pause action
         pause.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
                 auto.stop();
             }
         }); 
-        
+        //create manual action
         man.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {

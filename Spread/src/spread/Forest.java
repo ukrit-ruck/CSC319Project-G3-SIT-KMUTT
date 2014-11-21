@@ -14,7 +14,7 @@ import javax.swing.border.Border;
 
 /**
  *
- * @author anfeww
+ * @author tAnniiz-PC
  */
 public class Forest extends JPanel {
     private int width, height, probC, probT, probB;
@@ -57,7 +57,7 @@ public class Forest extends JPanel {
         tree[this.height / 2][this.width / 2].setState(2);
         this.update();
     }
-    //function forest
+    
     public Forest(int width, int height, int probB, int probC, int probT){
         this.width = width;
         this.height = height;
@@ -91,7 +91,7 @@ public class Forest extends JPanel {
     public boolean random(int prob){
         return (int)(Math.random()*100) < prob;
     }
-    //spread fire
+    
     public void spread(){
         try {
             Thread.sleep(100);
@@ -120,7 +120,7 @@ public class Forest extends JPanel {
             }
         }
     }
-    //fucntion burn
+    
     public void burn(char dir, int posX, int posY) {
         if(this.random(probC)){
             switch(dir){
@@ -143,14 +143,14 @@ public class Forest extends JPanel {
         
         return true;
     }
-    //function setsize
+    
     public void setSize(int width, int height){
         this.width = width;
         this.height = height;
         this.tree = new Tree[this.height][this.width];
         this.reset();
     }
-    //function reset
+    
     public void reset(){
         this.gl = new GridLayout(this.height, this.width);
         this.gl.setVgap(1);
@@ -241,26 +241,27 @@ public class Forest extends JPanel {
                     this.setBackground(Color.decode("#FF3300")); break;
             }
             
-           /* if(this.isShow){
+            if(this.isShow){
                 this.showNum();
-            }*/
+            }
             
             Forest.this.update();
         }
         
-        /*public void hideNum(){
+        public void hideNum(){
             this.isShow = false;
             this.setText("" + this.state);
             Forest.this.update();
-        }*/
+        }
         
-        /*public void showNum(){
+        public void showNum(){
             this.isShow = true;
             this.setText("" + this.state);
-            Forest.this.update();*/
+            Forest.this.update();
         }
         
     }
-//}
+}
+
     
 

@@ -241,27 +241,26 @@ public class Forest extends JPanel {
                     this.setBackground(Color.decode("#FF3300")); break;
             }
             
-            if(this.isShow){
+           /* if(this.isShow){
                 this.showNum();
-            }
+            }*/
             
             Forest.this.update();
         }
         
-        public void hideNum(){
+        /*public void hideNum(){
             this.isShow = false;
             this.setText("" + this.state);
             Forest.this.update();
-        }
+        }*/
         
-        public void showNum(){
+        /*public void showNum(){
             this.isShow = true;
             this.setText("" + this.state);
-            Forest.this.update();
+            Forest.this.update();*/
         }
         
     }
-}
-
+//}
     
 

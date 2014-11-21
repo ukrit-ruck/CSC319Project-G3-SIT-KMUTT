@@ -102,7 +102,7 @@ public class Spread {
         xt = new JLabel("Tree Probability : 0");
         xt.setFont(new Font("Serif", Font.BOLD, 14));
         JButton reset = new JButton("Reset");
-       JButton start = new JButton("start");
+      // JButton start = new JButton("start");
 
         sideMenu.add(xb);
         sideMenu.add(probb);
@@ -111,7 +111,7 @@ public class Spread {
         sideMenu.add(xt);
         sideMenu.add(probt);
         sideMenu.add(area);
-        sideMenu.add(start);
+       // sideMenu.add(start);
         sideMenu.add(reset);
         sideMenu.add(area2);
         sideMenu.add(area3);
@@ -152,33 +152,19 @@ public class Spread {
             public void actionPerformed(ActionEvent e)
             {
                 JOptionPane.showMessageDialog(null,"Tutorial\n" +
-"1. Start button: Click this button to start the simulation of forest fire that spreading.\n"+
-"2. Reset button: Click this button to reset the simulation to initial state with full of tree in the forest\n" +
-"3. Manual button: Click this button to simulate the spreading of fire step by step\n" +
-"4. Autospread button: Click this button to show automatic spread by randomise.\n" +
-"5. Pause button: Click this button when you use autospread button to stop that step. \n" +
-"6. Set Size button: Click this button to change area of forest by width and height\n" +
-"7. Slider Burn probability: The chance that trees is burning when creating the forest.(0%-100%)\n" + 
-"8. Catch probability: The chance that the fire will spread to the neighbor trees.(0%-100%)\n" +
-"9. Tree probability: The density of the forest in the field.(0%-100%)\n" , "Helps", JOptionPane.PLAIN_MESSAGE);
+"1. Reset button: Click this button to reset the simulation to initial state with full of tree in the forest\n" +
+"2. Manual button: Click this button to simulate the spreading of fire step by step\n" +
+"3. Autospread button: Click this button to show automatic spread by randomise.\n" +
+"4. Pause button: Click this button when you use autospread button to stop that step. \n" +
+"5. Set Size button: Click this button to change area of forest by width and height\n" +
+"6. Slider Burn probability: The chance that trees is burning when creating the forest.(0%-100%)\n" + 
+"7. Catch probability: The chance that the fire will spread to the neighbor trees.(0%-100%)\n" +
+"8. Tree probability: The density of the forest in the field.(0%-100%)\n" , "Helps", JOptionPane.PLAIN_MESSAGE);
             }
         }); 
-      
-            start.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                
-                forest.reset();
-                counter = 0;
-                step.setText("Step: " + counter);
-                frame.validate();
-                frame.repaint();
-            }
-        }); 
-        
 
-  //Start show burn forest and reset forest
+
+  // Reset forest 
          reset.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)

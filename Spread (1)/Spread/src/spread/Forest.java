@@ -235,6 +235,18 @@ public class Forest extends JPanel {
         public int getState() {
             return state;
         }
+      /*  
+        public void print(){
+             for (int i = 0; i < tree.length; i++) {
+            for (int j = 0; j < tree.length; j++) {
+                System.out.print(tree[i][j] + " ");
+            }
+            System.out.println();
+            
+        }
+        System.out.println("++++++++++++++++++++++++++++++++");
+    
+        }*/
 
         public void setState(int state) {
             this.state = state;
